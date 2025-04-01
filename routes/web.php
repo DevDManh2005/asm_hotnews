@@ -3,13 +3,19 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome');
-})->name('home');
+use App\Http\Controllers\HomeController;
 
-Route::get('dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+route::get("/", [HomeController::class , 'index']);
 
-require __DIR__.'/settings.php';
-require __DIR__.'/auth.php';
+Route::get('/about', function () {
+    return view('about');
+});
+
+Route::get('/contact', function () {
+    return view('contact');
+});
+
+Route::get('/quangcao', function () {
+    return view('quangcao');
+});
+
