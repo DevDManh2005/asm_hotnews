@@ -89,128 +89,139 @@
 @endsection
 
 <style>
-    /* General Styles */
-    .contact-container {
-        max-width: 1200px;
-        margin: 40px auto;
-        padding: 30px;
-        background: #fff;
-        border-radius: 15px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
-    .contact-container h1 {
-        text-align: center;
-        color: #ff6600;
-        margin-bottom: 30px;
-        font-size: 36px;
-        font-weight: bold;
-    }
-    
-    .contact-container p {
-        font-size: 18px;
-        line-height: 1.8;
-        color: #555;
-        text-align: justify;
-    }
-    
-    /* Form Styles */
-    .ad-form {
-        margin-top: 30px;
-    }
-    
-    .ad-form label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-        color: #333;
-    }
-    
-    .ad-form input[type="text"],
-    .ad-form input[type="email"],
-    .ad-form select,
-    .ad-form textarea {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 16px;
-    }
-    
-    .ad-form textarea {
-        resize: vertical;
-        height: 120px;
-    }
-    
-    .ad-form button {
-        display: inline-block;
-        padding: 10px 20px;
-        background: #ff6600;
-        color: #fff;
-        font-size: 18px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-    }
-    
-    .ad-form button:hover {
-        background: #e65c00;
-    }
-    
-    /* Section Divider */
-    .section-divider {
-        margin: 40px 0;
-        border-top: 2px solid #f0f0f0;
-    }
-    
-    /* Flexbox Layout for Google Map and Facebook Plugin */
+   /* 🌟 Container chính */
+.contact-container {
+    max-width: 1200px;
+    margin: 40px auto; /* Căn giữa nội dung */
+    padding: 30px; /* Padding rộng hơn */
+    background: #fff; /* Nền trắng */
+    border-radius: 15px; /* Bo tròn góc mềm mại */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Bóng đổ đậm hơn */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 🌟 Tiêu đề lớn */
+.contact-container h1 {
+    text-align: center;
+    color: #1e3a8a; /* Màu xanh biển thay vì cam */
+    margin-bottom: 30px;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+/* 🌟 Đoạn văn */
+.contact-container p {
+    font-size: 18px;
+    line-height: 1.8; /* Chiều cao dòng thoải mái */
+    color: #333; /* Màu chữ tối hơn để dễ đọc */
+    text-align: justify;
+    margin-bottom: 30px;
+}
+
+/* 🌟 Form liên hệ */
+.ad-form {
+    margin-top: 30px;
+}
+
+.ad-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #1e3a8a; /* Màu xanh biển */
+}
+
+.ad-form input[type="text"],
+.ad-form input[type="email"],
+.ad-form select,
+.ad-form textarea {
+    width: 100%;
+    padding: 12px; /* Padding rộng hơn */
+    margin-bottom: 20px; /* Khoảng cách giữa các trường */
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Bo tròn góc mềm mại hơn */
+    font-size: 16px;
+    transition: border-color 0.3s ease; /* Hiệu ứng mượt mà */
+}
+
+.ad-form textarea {
+    resize: vertical;
+    height: 150px; /* Tăng chiều cao của ô nhập liệu */
+}
+
+.ad-form input:focus,
+.ad-form select:focus,
+.ad-form textarea:focus {
+    border-color: #ff9800; /* Viền cam khi focus */
+    outline: none; /* Loại bỏ viền mặc định */
+}
+
+.ad-form button {
+    display: inline-block;
+    padding: 12px 25px; /* Padding rộng hơn */
+    background: #ff9800; /* Màu cam */
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px; /* Bo tròn góc mềm mại hơn */
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.ad-form button:hover {
+    background: #e65100; /* Màu cam đậm khi hover */
+}
+
+/* 🌟 Section Divider */
+.section-divider {
+    margin: 40px 0;
+    border-top: 2px solid #f0f0f0; /* Đường kẻ nhạt */
+}
+
+/* 🌟 Flexbox Layout cho Google Map và Facebook Plugin */
+.contact-map-facebook {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    gap: 20px;
+}
+
+/* 🌟 Google Map Style */
+.google-map {
+    width: calc(50% - 10px); /* Chiếm 50% không gian */
+    border-radius: 12px; /* Bo tròn góc mềm mại hơn */
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Bóng đổ đậm hơn */
+}
+
+.google-map iframe {
+    width: 100%;
+    height: 450px;
+    border: 0;
+}
+
+/* 🌟 Facebook Page Plugin Style */
+.fb-page-container {
+    width: calc(50% - 10px); /* Chiếm 50% không gian */
+    border-radius: 12px; /* Bo tròn góc mềm mại hơn */
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Bóng đổ đậm hơn */
+}
+
+.fb-page {
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+}
+
+/* 🌟 Responsive Design */
+@media (max-width: 992px) {
     .contact-map-facebook {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 40px;
-        gap: 20px;
+        flex-direction: column;
     }
-    
-    /* Google Map Style */
-    .google-map {
-        width: calc(50% - 10px); /* Takes up 50% of the available space */
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-    
-    .google-map iframe {
-        width: 100%;
-        height: 450px;
-        border: 0;
-    }
-    
-    /* Facebook Page Plugin Style */
+
+    .google-map,
     .fb-page-container {
-        width: calc(50% - 10px); /* Takes up 50% of the available space */
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 100%; /* Chiếm toàn bộ chiều rộng trên màn hình nhỏ */
     }
-    
-    .fb-page {
-        width: 100%;
-        height: 450px;
-        overflow: hidden;
-    }
-    
-    /* Responsive Design */
-    @media (max-width: 992px) {
-        .contact-map-facebook {
-            flex-direction: column;
-        }
-    
-        .google-map,
-        .fb-page-container {
-            width: 100%;
-        }
-    }
+}
     </style>

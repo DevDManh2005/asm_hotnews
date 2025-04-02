@@ -1,211 +1,308 @@
-/* Reset mặc định */
-* {
+/* ---------------------- Layout CSS ---------------------- */
+
+/* 🌟 Toàn bộ trang */
+body {
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-body {
-    background-color: #f5f5f5;
+    background-color: #f0f8ff; /* Màu nền xanh nhạt */
     color: #333;
-    line-height: 1.6;
-}
-/* Header */
-.header {
-    background: #fff; /* Nền trắng */
-    color: #000; /* Chữ đen */
-    padding: 10px 0; /* Padding theo chiều dọc */
-    display: flex;
-    align-items: center; /* Căn giữa theo chiều dọc */
-    border-bottom: 1px solid #ddd; /* Thêm viền dưới để phân cách header với nội dung */
 }
 
-/* Phần logo bên trái */
-.header-logo {
-    margin-left: 200px; /* Khoảng cách 200px từ lề trái */
+/* 🌟 Header */
+.header {
+    background-color: #1e3a8a; /* Màu xanh biển đậm */
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .header-logo img {
-    max-height: 100px; /* Tăng chiều cao tối đa của logo */
-    width: auto; /* Giữ tỷ lệ khung hình */
+    max-width: 150px;
+    margin-left: 200px; /* Cách bên trái 200px */
 }
 
-/* Phần nội dung bên phải */
 .header-content {
     display: flex;
-    align-items: center; /* Căn giữa theo chiều dọc */
-    margin-left: auto; /* Đẩy nội dung sang bên phải */
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-right: 200px; /* Cách bên phải 200px */
 }
 
-/* Menu trái */
 .header-left ul {
-    list-style: none;
+    list-style-type: none;
     display: flex;
+    gap: 20px;
     margin: 0;
-    padding: 0;
-}
-
-.header-left ul li {
-    margin: 0 10px;
 }
 
 .header-left ul li a {
-    color: #000; /* Chữ đen */
+    color: white;
     text-decoration: none;
-    font-size: 16px;
-    transition: color 0.3s ease;
+    font-weight: bold;
+    transition: color 0.3s;
 }
 
 .header-left ul li a:hover {
-    color: #ff6600; /* Hiệu ứng hover cho menu */
+    color: #ff9800; /* Màu cam khi hover */
 }
 
-/* Form tìm kiếm */
 .header-right form {
     display: flex;
-    align-items: center;
-    margin-left: 20px; /* Khoảng cách giữa menu và form */
-    margin-right: 200px; /* Khoảng cách cố định 200px từ lề phải */
+    gap: 10px;
 }
 
 .header-right input {
-    padding: 5px;
-    border: 1px solid #ccc; /* Viền nhẹ cho ô nhập liệu */
-    border-radius: 5px;
-    margin-right: 5px;
-    outline: none; /* Loại bỏ viền khi focus */
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 200px; /* Chiều rộng của ô tìm kiếm */
 }
 
 .header-right button {
-    background: #ff6600;
-    color: white;
+    padding: 8px 12px;
+    background-color: #ff9800;
     border: none;
-    padding: 5px 10px;
+    border-radius: 8px;
     cursor: pointer;
-    border-radius: 5px;
-    transition: background 0.3s ease;
+    color: white;
+    transition: background-color 0.3s;
 }
 
 .header-right button:hover {
-    background: #e65c00; /* Hiệu ứng hover cho nút tìm kiếm */
+    background-color: #e65100; /* Màu cam đậm khi hover */
 }
-/* Navbar */
+/* ---------------------- Navbar ---------------------- */
 .main-nav {
-    background: #222;
-    padding: 10px;
+    background-color: #1e3a8a; /* Xanh biển */
+    padding: 10px 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .main-nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
-    list-style: none;
-}
-
-.main-nav ul li {
-    margin: 0 15px;
+    gap: 30px;
 }
 
 .main-nav ul li a {
     color: white;
     text-decoration: none;
+    font-weight: bold;
     font-size: 16px;
+    transition: color 0.3s;
 }
-/* Main content */
+
+.main-nav ul li a:hover {
+    color: #ff9800;
+}
+
+/* ---------------------- Main Content ---------------------- */
 .content {
-    display: flex;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 20px auto;
-    gap: 20px;
-    min-height: 500px;
+    display: flex;
+    gap: 40px;
 }
 
+/* Content Article */
 article {
-    flex: 3;
-    background: white;
+    width: 70%; /* Tăng chiều rộng nội dung chính */
+    background-color: white; /* Nền trắng */
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Sidebar */
 aside {
-    flex: 1;
-    background: white;
+    width: 30%; /* Giảm chiều rộng sidebar */
+    background-color: white; /* Nền trắng */
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Custom styles for aside */
+/* Tiêu đề sidebar */
 aside h2 {
-    text-align: center;
-    color: #ff6600;
-    font-size: 24px;
+    font-size: 28px;
+    color: #1e3a8a;
     margin-bottom: 20px;
-    border-bottom: 2px solid #ff6600;
-    padding-bottom: 10px;
+    font-weight: 700;
+    text-align: center;
 }
 
-aside .ad-sample-list {
+/* Danh sách mục quảng cáo */
+.ad-sample-list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 25px;
 }
 
-aside .ad-sample-item {
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
+/* Mỗi mục quảng cáo */
+.ad-sample-item {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-aside .ad-sample-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+.ad-sample-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-aside .ad-sample-item img {
+/* Phần hình ảnh */
+.ad-sample-item .image-placeholder {
     width: 100%;
-    height: 200px; /* Điều chỉnh chiều cao hình ảnh */
+    height: 200px;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px dashed #e0e0e0;
+    border-radius: 10px;
+}
+
+.ad-sample-item img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    border-radius: 10px;
 }
 
-aside .ad-sample-item h3 {
-    font-size: 18px;
-    margin: 10px;
+.ad-sample-item img[src=""] {
+    display: none;
+}
+
+/* Tiêu đề mỗi mục quảng cáo */
+.ad-sample-item h3 {
+    font-size: 22px;
     color: #333;
-    text-align: center;
+    margin: 10px 0;
+    font-weight: 600;
 }
 
-aside .ad-sample-item p {
-    font-size: 14px;
-    margin: 10px;
-    color: #555;
-    text-align: center;
+/* Mô tả quảng cáo */
+.ad-sample-item p {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 15px;
 }
 
-aside .ad-sample-item a {
-    display: block;
-    text-align: center;
-    margin: 10px auto 20px;
-    padding: 10px 20px;
-    background: #ff6600;
-    color: #fff;
+/* Liên kết trong mục quảng cáo */
+.ad-sample-item a {
+    color: #1e3a8a;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background 0.3s ease;
+    font-weight: bold;
+    transition: color 0.3s ease;
 }
 
-aside .ad-sample-item a:hover {
-    background: #e65c00;
+.ad-sample-item a:hover {
+    color: #ff9800;
 }
-/* Footer */
+
+/* ---------------------- Footer ---------------------- */
+/* ---------------------- Footer ---------------------- */
 .footer {
-    background: #333;
+    background-color: #1e3a8a; /* Màu xanh biển đậm */
     color: white;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    position: relative;
+}
+
+.footer-logo img {
+    max-width: 150px;
+    margin-left: 200px; /* Cách bên trái 200px */
+}
+
+.footer-right {
+    display: flex;
+    gap: 30px;
+    margin-right: 200px; /* Cách bên phải 200px */
+}
+
+.footer-links ul {
+    list-style-type: none;
+    display: flex;
+    gap: 30px;
+}
+
+.footer-links ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.footer-links ul li a:hover {
+    color: #ff9800; /* Màu cam khi hover */
+}
+
+.footer-socials {
+    display: flex;
+    gap: 15px;
+    margin-top: 13px;
+}
+
+.footer-socials .social-icon {
+    color: white;
+    font-size: 20px;
+    margin: 0;
+    transition: color 0.3s;
+}
+
+.footer-socials .social-icon:hover {
+    color: #ff9800;
+}
+
+/* Thêm phần căn giữa cho © 2025 Lê Đức Mạnh */
+.footer-bottom {
+    position: absolute;
+    bottom: 0px; /* Đặt phần này ở dưới cùng của footer */
+    left: 50%;
+    transform: translateX(-50%); /* Căn giữa phần văn bản */
+    font-size: 14px;
+    color: #ccc;
     text-align: center;
-    padding: 15px;
-    margin-top: 20px;
+    width: 100%; /* Chiếm toàn bộ chiều rộng của footer */
+}
+
+/* ---------------------- Responsive Design ---------------------- */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .ad-sample-list {
+        flex-direction: column;
+    }
+
+    .footer {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
 }

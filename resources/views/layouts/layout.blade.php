@@ -1,30 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <!-- Thêm Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>@yield('title')</title>
 </head>
+
 <body>
     <header class="header">
         <!-- Logo -->
         <div class="header-logo">
-            <img src="{{ asset("images/HOTNEWS360.gif") }}" alt="HOTNEWS360 Logo">
+            <img src="{{ asset('images/HOTNEWS360.gif') }}" alt="HOTNEWS360 Logo">
         </div>
-    
+
         <!-- Menu và Form tìm kiếm -->
         <div class="header-content">
             <!-- Menu -->
             <div class="header-left">
                 <ul>
-                    <li><a href="/about">Giới Thiệu</a></li>
-                    <li><a href="/contact">Liên Hệ</a></li>
-                    <li><a href="/quangcao">Quảng Cáo</a></li>
+                    <li><a href="/">Trang Chủ</a></li>
+                    <li><a href="{{ route('about') }}">Giới Thiệu</a></li>
+                    <li><a href="{{ route('contact') }}">Liên Hệ</a></li>
+                    <li><a href="{{ route('quangcao') }}">Quảng Cáo</a></li>
                 </ul>
             </div>
-    
+
             <!-- Form tìm kiếm -->
             <div class="header-right">
                 <form action="#" method="GET">
@@ -34,71 +39,80 @@
             </div>
         </div>
     </header>
+
     <nav class="main-nav">
-        <ul>
-            <li><a href="/">Trang Chủ</a></li>
-            <li><a href="#">Tin Tức</a></li>
-            <li><a href="#">Bóng Đá</a></li>
-            <li><a href="#">Ngoại Hạng Anh</a></li>
-            <li><a href="#">Kinh Doanh</a></li>
-            <li><a href="#">Giải Trí</a></li>
-            <li><a href="#">Sức Khỏe</a></li>
-            <li><a href="#">Hi-Tech</a></li>
-            <li><a href="#">Thế Giới</a></li>
-            <li><a href="#">Thể Thao</a></li>
-            <li><a href="#">Ô TÔ</a></li>
-            <li><a href="#">Phái Đẹp</a></li>
-        </ul>
+        <!-- Hiển thị danh sách danh mục -->
+        <div class="categories-sidebar">
+            <ul>
+                @if(isset($categories) && $categories->count() > 0)
+                    @foreach ($categories as $cat)
+                        <li><a href="{{ route('category.show', $cat->slug) }}">{{ $cat->name }}</a></li>
+                    @endforeach
+                @else
+                    <li><p>Không có danh mục nào.</p></li>
+                @endif
+            </ul>
+        </div>
     </nav>
+
     <main class="content">
         <article>@yield('noidung')</article>
+
+        <!-- Sidebar: Quảng cáo -->
         <aside>
             <h2>Các Mẫu Quảng Cáo Đã Thực Hiện</h2>
             <div class="ad-sample-list">
-                <!-- Mẫu quảng cáo 1 -->
-                <div class="ad-sample-item">
-                    <img src="https://via.placeholder.com/300x300?text=Banner+Ad" alt="Mẫu quảng cáo Banner">
-                    <h3>Quảng cáo Banner</h3>
-                    <p>Mẫu quảng cáo banner hiển thị ở đầu trang web.</p>
-                    <a href="#">Xem chi tiết</a>
-                </div>
-        
-                <!-- Mẫu quảng cáo 2 -->
-                <div class="ad-sample-item">
-                    <img src="https://via.placeholder.com/300x300?text=Pop-up+Ad" alt="Mẫu quảng cáo Pop-up">
-                    <h3>Quảng cáo Pop-up</h3>
-                    <p>Mẫu quảng cáo pop-up xuất hiện khi người dùng truy cập.</p>
-                    <a href="#">Xem chi tiết</a>
-                </div>
-        
-                <!-- Mẫu quảng cáo 3 -->
-                <div class="ad-sample-item">
-                    <img src="https://via.placeholder.com/300x300?text=Video+Ad" alt="Mẫu quảng cáo Video">
-                    <h3>Quảng cáo Video</h3>
-                    <p>Mẫu quảng cáo video ngắn gọn, hấp dẫn.</p>
-                    <a href="#">Xem chi tiết</a>
-                </div>
-        
-                <!-- Mẫu quảng cáo 4 -->
-                <div class="ad-sample-item">
-                    <img src="https://via.placeholder.com/300x300?text=Social+Media+Ad" alt="Mẫu quảng cáo Social Media">
-                    <h3>Quảng cáo trên mạng xã hội</h3>
-                    <p>Mẫu quảng cáo tối ưu hóa cho Facebook, Instagram.</p>
-                    <a href="#">Xem chi tiết</a>
-                </div>
-        
-                <!-- Mẫu quảng cáo 5 -->
-                <div class="ad-sample-item">
-                    <img src="https://via.placeholder.com/300x300?text=Native+Ad" alt="Mẫu quảng cáo Native">
-                    <h3>Quảng cáo Native</h3>
-                    <p>Mẫu quảng cáo tích hợp tự nhiên vào nội dung trang web.</p>
-                    <a href="#">Xem chi tiết</a>
-                </div>
+                @php
+                    // Hardcode dữ liệu mẫu cho quảng cáo
+                    $ads = [
+                        ['title' => 'Quảng cáo Banner', 'description' => 'Mẫu quảng cáo banner hiển thị ở đầu trang web.', 'image' => 'banner.jpg'],
+                        ['title' => 'Quảng cáo Pop-up', 'description' => 'Mẫu quảng cáo pop-up xuất hiện khi người dùng truy cập.', 'image' => 'popup.jpg'],
+                        ['title' => 'Quảng cáo Video', 'description' => 'Mẫu quảng cáo video ngắn gọn, hấp dẫn.', 'image' => 'video.jpg'],
+                        ['title' => 'Quảng cáo trên mạng xã hội', 'description' => 'Mẫu quảng cáo tối ưu hóa cho Facebook, Instagram.', 'image' => 'social.jpg'],
+                        ['title' => 'Quảng cáo Native', 'description' => 'Mẫu quảng cáo tích hợp tự nhiên vào nội dung trang web.', 'image' => 'native.jpg'],
+                    ];
+                @endphp
+
+                @foreach ($ads as $ad)
+                    <div class="ad-sample-item">
+                        <div class="image-placeholder">
+                            <img src="{{ asset('storage/images/' . $ad['image']) }}" alt="{{ $ad['title'] }}">
+                        </div>
+                        <h3>{{ $ad['title'] }}</h3>
+                        <p>{{ $ad['description'] }}</p>
+                        <a href="#">Xem chi tiết</a>
+                    </div>
+                @endforeach
             </div>
         </aside>
     </main>
+
     <footer class="footer">
-        <h3>Lê Đức Mạnh</h3>
+        <div class="footer-logo">
+            <img src="{{ asset('images/HOTNEWS360.gif') }}" alt="">
+        </div>
+
+        <div class="footer-right">
+            <div class="footer-links">
+                <ul>
+                    <li><a href="{{ route('about') }}">Giới Thiệu</a></li>
+                    <li><a href="{{ route('contact') }}">Liên Hệ</a></li>
+                    <li><a href="{{ route('quangcao') }}">Quảng Cáo</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-socials">
+                <a href="https://www.facebook.com/Autosubz.comm/" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/Dev_Dmanh2005" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/in/dev-dmanh2005/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/DevDManh2005" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Lê Đức Mạnh. All rights reserved.</p>
+        </div>
     </footer>
 </body>
+
 </html>
