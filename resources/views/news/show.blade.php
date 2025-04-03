@@ -17,7 +17,7 @@
         <!-- Nội dung bài viết -->
         <div class="post-content">
             @if ($news->image)
-                <img src="{{ asset('storage/images/' . $news->image) }}" alt="{{ $news->title }}" class="post-image">
+            <img src="{{ asset($news->image) }}" alt="{{ $news->title }}"class="post-image">
             @else
                 <div class="post-image-placeholder"></div> <!-- Hiển thị placeholder nếu không có ảnh -->
             @endif

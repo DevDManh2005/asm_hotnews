@@ -14,7 +14,8 @@
                 <!-- Thêm liên kết bao quanh mỗi bài viết -->
                 <a href="{{ route('news.show', $item->slug) }}" class="news-item-link">
                     <div class="news-item">
-                        <img src="{{ asset('storage/images/' . $item->image) }}" alt="{{ $item->title }}">
+                        <img src="{{ asset($item->image) }}" alt="{{ $item->title }}">
+                    
                         <div class="news-item-content">
                             <h3>{{ $item->title }}</h3>
                             <p>{{ Str::limit($item->content, 100) }}</p>

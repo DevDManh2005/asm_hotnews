@@ -13,7 +13,7 @@
             @foreach ($latestNews as $news)
                 <div class="news-item">
                     <a href="{{ route('news.show', $news->slug) }}">
-                        <img src="{{ asset('storage/images/' . $news->image) }}" alt="{{ $news->title }}">
+                        <img src="{{ asset($news->image) }}" alt="{{ $news->title }}">
                         <div class="news-item-content">
                             <h3>{{ $news->title }}</h3>
                             <p>{{ Str::limit($news->content, 100) }}</p>
@@ -33,7 +33,7 @@
             @foreach ($hotNews as $news)
                 <div class="news-item">
                     <a href="{{ route('news.show', $news->slug) }}">
-                        <img src="{{ asset('storage/images/' . $news->image) }}" alt="{{ $news->title }}">
+                        <img src="{{ asset($news->image) }}" alt="{{ $news->title }}">
                         <div class="news-item-content">
                             <h3>{{ $news->title }}</h3>
                             <p>{{ Str::limit($news->content, 100) }}</p>
@@ -54,7 +54,7 @@
                 @foreach ($category->news->take(3) as $news)
                     <div class="news-item">
                         <a href="{{ route('news.show', $news->slug) }}">
-                            <img src="{{ asset('storage/images/' . $news->image) }}" alt="{{ $news->title }}">
+                            <img src="{{ asset($news->image) }}" alt="{{ $news->title }}">
                             <div class="news-item-content">
                                 <h3>{{ $news->title }}</h3>
                                 <p>{{ Str::limit($news->content, 100) }}</p>
