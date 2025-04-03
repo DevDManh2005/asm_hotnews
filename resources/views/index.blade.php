@@ -68,7 +68,6 @@
     @endforeach
 </div>
 @endsection
-
 <style>
 /* 🌟 Bố cục tổng thể */
 .container.home-container {

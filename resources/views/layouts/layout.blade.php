@@ -13,14 +13,11 @@
 
 <body>
     <header class="header">
-        <!-- Logo -->
         <div class="header-logo">
             <img src="{{ asset('images/HOTNEWS360.gif') }}" alt="HOTNEWS360 Logo">
         </div>
 
-        <!-- Menu và Form tìm kiếm -->
         <div class="header-content">
-            <!-- Menu -->
             <div class="header-left">
                 <ul>
                     <li><a href="/">Trang Chủ</a></li>
@@ -30,12 +27,29 @@
                 </ul>
             </div>
 
-            <!-- Form tìm kiếm -->
             <div class="header-right">
                 <form action="#" method="GET">
                     <input type="text" placeholder="Tìm kiếm..." name="q">
                     <button type="submit">Tìm</button>
                 </form>
+            </div>
+            <div class="fromxacthuc">
+                @if (Auth::check())
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="auth-btn logout-btn">Đăng Xuất</button>
+                    </form>
+            @else
+                    <a href="{{ route('login') }}">
+                        <button class="auth-btn login-btn">Đăng Nhập</button>
+                    </a>
+                    <a href="{{ route('register') }}">
+                        <button class="auth-btn register-btn">Đăng Ký</button>
+                    </a>
+                    <a href="{{ route('password.request') }}">
+                        <button class="auth-btn forgot-btn">Quên Mật Khẩu?</button>
+                    </a>
+            @endif
             </div>
         </div>
     </header>
@@ -49,7 +63,9 @@
                         <li><a href="{{ route('category.show', $cat->slug) }}">{{ $cat->name }}</a></li>
                     @endforeach
                 @else
-                    <li><p>Không có danh mục nào.</p></li>
+                    <li>
+                        <p>Không có danh mục nào.</p>
+                    </li>
                 @endif
             </ul>
         </div>
@@ -57,34 +73,56 @@
 
     <main class="content">
         <article>@yield('noidung')</article>
-
-        <!-- Sidebar: Quảng cáo -->
         <aside>
             <h2>Các Mẫu Quảng Cáo Đã Thực Hiện</h2>
             <div class="ad-sample-list">
-                @php
-                    // Hardcode dữ liệu mẫu cho quảng cáo
-                    $ads = [
-                        ['title' => 'Quảng cáo Banner', 'description' => 'Mẫu quảng cáo banner hiển thị ở đầu trang web.', 'image' => 'banner.jpg'],
-                        ['title' => 'Quảng cáo Pop-up', 'description' => 'Mẫu quảng cáo pop-up xuất hiện khi người dùng truy cập.', 'image' => 'popup.jpg'],
-                        ['title' => 'Quảng cáo Video', 'description' => 'Mẫu quảng cáo video ngắn gọn, hấp dẫn.', 'image' => 'video.jpg'],
-                        ['title' => 'Quảng cáo trên mạng xã hội', 'description' => 'Mẫu quảng cáo tối ưu hóa cho Facebook, Instagram.', 'image' => 'social.jpg'],
-                        ['title' => 'Quảng cáo Native', 'description' => 'Mẫu quảng cáo tích hợp tự nhiên vào nội dung trang web.', 'image' => 'native.jpg'],
-                    ];
-                @endphp
-
-                @foreach ($ads as $ad)
-                    <div class="ad-sample-item">
-                        <div class="image-placeholder">
-                            <img src="{{ asset('storage/images/' . $ad['image']) }}" alt="{{ $ad['title'] }}">
-                        </div>
-                        <h3>{{ $ad['title'] }}</h3>
-                        <p>{{ $ad['description'] }}</p>
-                        <a href="#">Xem chi tiết</a>
+                <div class="ad-sample-item">
+                    <div class="image-placeholder">
+                        <img src="storage/images/banner.jpg" alt="Quảng cáo Banner">
                     </div>
-                @endforeach
+                    <h3>Quảng cáo Banner</h3>
+                    <p>Mẫu quảng cáo banner hiển thị ở đầu trang web.</p>
+                    <a href="#">Xem chi tiết</a>
+                </div>
+
+                <div class="ad-sample-item">
+                    <div class="image-placeholder">
+                        <img src="storage/images/popup.jpg" alt="Quảng cáo Pop-up">
+                    </div>
+                    <h3>Quảng cáo Pop-up</h3>
+                    <p>Mẫu quảng cáo pop-up xuất hiện khi người dùng truy cập.</p>
+                    <a href="#">Xem chi tiết</a>
+                </div>
+
+                <div class="ad-sample-item">
+                    <div class="image-placeholder">
+                        <img src="storage/images/video.jpg" alt="Quảng cáo Video">
+                    </div>
+                    <h3>Quảng cáo Video</h3>
+                    <p>Mẫu quảng cáo video ngắn gọn, hấp dẫn.</p>
+                    <a href="#">Xem chi tiết</a>
+                </div>
+
+                <div class="ad-sample-item">
+                    <div class="image-placeholder">
+                        <img src="storage/images/social.jpg" alt="Quảng cáo trên mạng xã hội">
+                    </div>
+                    <h3>Quảng cáo trên mạng xã hội</h3>
+                    <p>Mẫu quảng cáo tối ưu hóa cho Facebook, Instagram.</p>
+                    <a href="#">Xem chi tiết</a>
+                </div>
+
+                <div class="ad-sample-item">
+                    <div class="image-placeholder">
+                        <img src="storage/images/native.jpg" alt="Quảng cáo Native">
+                    </div>
+                    <h3>Quảng cáo Native</h3>
+                    <p>Mẫu quảng cáo tích hợp tự nhiên vào nội dung trang web.</p>
+                    <a href="#">Xem chi tiết</a>
+                </div>
             </div>
         </aside>
+
     </main>
 
     <footer class="footer">
@@ -102,10 +140,14 @@
             </div>
 
             <div class="footer-socials">
-                <a href="https://www.facebook.com/Autosubz.comm/" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://x.com/Dev_Dmanh2005" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.linkedin.com/in/dev-dmanh2005/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://github.com/DevDManh2005" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+                <a href="https://www.facebook.com/Autosubz.comm/" target="_blank" class="social-icon"><i
+                        class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/Dev_Dmanh2005" target="_blank" class="social-icon"><i
+                        class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/in/dev-dmanh2005/" target="_blank" class="social-icon"><i
+                        class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/DevDManh2005" target="_blank" class="social-icon"><i
+                        class="fab fa-github"></i></a>
             </div>
         </div>
 

@@ -14,29 +14,32 @@ body {
     background-color: #1e3a8a; /* Màu xanh biển đậm */
     padding: 20px 0;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-between; /* Phân bổ không gian giữa các phần tử */
+    align-items: center; /* Căn chỉnh các phần tử theo chiều dọc */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* 🌟 Logo */
 .header-logo img {
     max-width: 150px;
-    margin-left: 200px; /* Cách bên trái 200px */
+    margin-left: 20px; /* Khoảng cách bên trái */
 }
 
+/* 🌟 Nội dung header */
 .header-content {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-right: 200px; /* Cách bên phải 200px */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    gap: 20px; /* Khoảng cách giữa các phần tử */
+    margin-right: 20px; /* Khoảng cách bên phải */
 }
 
+/* 🌟 Menu trái */
 .header-left ul {
     list-style-type: none;
     display: flex;
     gap: 20px;
     margin: 0;
+    padding: 0;
 }
 
 .header-left ul li a {
@@ -50,9 +53,50 @@ body {
     color: #ff9800; /* Màu cam khi hover */
 }
 
+/* 🌟 Phần đăng nhập/đăng ký/đăng xuất */
+.fromxacthuc {
+    display: flex;
+    flex-direction: column; /* Sắp xếp các nút theo chiều dọc */
+    gap: 10px; /* Khoảng cách giữa các nút */
+    align-items: flex-end; /* Căn phải các nút */
+    margin-top: 10px; /* Khoảng cách từ phần trên */
+}
+
+.fromxacthuc a, .fromxacthuc form {
+    display: flex;
+    align-items: center;
+}
+
+.auth-btn {
+    padding: 8px 16px; /* Giảm kích thước nút */
+    border-radius: 6px;
+    font-size: 12px; /* Giảm kích thước chữ */
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    text-transform: uppercase; /* Chữ in hoa */
+    min-width: 120px; /* Giảm chiều rộng tối thiểu */
+    background-color: #ff9800; /* Màu cam duy nhất */
+    color: white;
+}
+
+.auth-btn:hover {
+    opacity: 0.9; /* Hiệu ứng mờ khi hover */
+}
+
+/* Hiệu ứng focus cho nút */
+.auth-btn:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* 🌟 Tìm kiếm */
 .header-right form {
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
 .header-right input {
@@ -214,7 +258,6 @@ aside h2 {
     color: #ff9800;
 }
 
-/* ---------------------- Footer ---------------------- */
 /* ---------------------- Footer ---------------------- */
 .footer {
     background-color: #1e3a8a; /* Màu xanh biển đậm */
