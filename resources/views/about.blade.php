@@ -1,7 +1,8 @@
 @extends('layouts.layout')
-@section('title', 'Giới Thiệu')
-@section('noidung')
 
+@section('title', 'Giới Thiệu')
+
+@section('noidung')
 <div class="about-container">
     <h1>Chào mừng đến với HotNews360</h1>
     <p>HotNews360 là trang tin tức hàng đầu, cập nhật nhanh chóng và chính xác những thông tin nóng hổi trong nước và quốc tế.</p>
@@ -26,34 +27,33 @@
     </ul>
     
     <h2>Liên hệ với chúng tôi</h2>
-    <p>Chúng tôi luôn sẵn sàng lắng nghe ý kiến đóng góp từ độc giả. Hãy liên hệ với chúng tôi qua email: <strong>contact@hotnews360.com</strong></p>
+    <p>Chúng tôi luôn sẵn sàng lắng nghe ý kiến đóng góp từ độc giả. Hãy liên hệ với chúng tôi qua email: <strong><a href="mailto:contact@hotnews360.com">contact@hotnews360.com</a></strong></p>
 </div>
-
 @endsection
 <style>
-   /* 🌟 Container chính */
+  /* 🌟 Container chính */
 .about-container {
-    max-width: 800px;
-    margin: 20px auto; /* Căn giữa nội dung */
+    max-width: 800px; /* Chiều rộng tối đa đồng nhất */
+    margin: 40px auto; /* Căn giữa nội dung */
     background: #fff; /* Nền trắng */
-    padding: 30px; /* Tăng padding để tạo khoảng cách rộng hơn */
-    border-radius: 12px; /* Bo tròn góc mềm mại hơn */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Bóng đổ đậm hơn */
-    font-family: Arial, sans-serif;
+    padding: 30px; /* Padding rộng hơn */
+    border-radius: 15px; /* Bo tròn góc mềm mại */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Bóng đổ đậm hơn */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* 🌟 Tiêu đề lớn */
 .about-container h1 {
     text-align: center;
-    color: #1e3a8a; /* Màu xanh biển thay vì cam */
+    color: #007bff; /* Màu xanh dương đồng nhất */
     font-size: 36px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     font-weight: 700;
 }
 
 /* 🌟 Tiêu đề phụ */
 .about-container h2 {
-    color: #1e3a8a; /* Màu xanh biển */
+    color: #007bff; /* Màu xanh dương đồng nhất */
     border-bottom: 2px solid #ff9800; /* Viền cam nổi bật */
     padding-bottom: 10px;
     margin-top: 30px;
@@ -93,7 +93,7 @@
 
 /* 🌟 Phần in đậm trong danh sách */
 .about-container strong {
-    color: #1e3a8a; /* Màu xanh biển */
+    color: #007bff; /* Màu xanh dương đồng nhất */
     font-weight: bold;
 }
 
@@ -107,5 +107,24 @@
 
 .about-container a:hover {
     color: #e65100; /* Màu cam đậm khi hover */
+}
+
+/* 🌟 Responsive Design */
+@media (max-width: 768px) {
+    .about-container h1 {
+        font-size: 30px; /* Giảm kích thước tiêu đề */
+    }
+
+    .about-container h2 {
+        font-size: 20px; /* Giảm kích thước tiêu đề phụ */
+    }
+
+    .about-container p {
+        font-size: 14px; /* Giảm kích thước đoạn văn */
+    }
+
+    .about-container ul li {
+        padding: 10px; /* Giảm padding */
+    }
 }
 </style>

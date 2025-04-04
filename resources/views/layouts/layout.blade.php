@@ -13,11 +13,13 @@
 
 <body>
     <header class="header">
-        <div class="header-logo">
-            <img src="{{ asset('images/HOTNEWS360.gif') }}" alt="HOTNEWS360 Logo">
-        </div>
-
-        <div class="header-content">
+        <div class="header-wrapper">
+            <!-- Logo -->
+            <div class="header-logo">
+                <img src="{{ asset('images/HOTNEWS360.gif') }}" alt="HOTNEWS360 Logo">
+            </div>
+    
+            <!-- Menu -->
             <div class="header-left">
                 <ul>
                     <li><a href="/">Trang Chủ</a></li>
@@ -26,20 +28,23 @@
                     <li><a href="{{ route('quangcao') }}">Quảng Cáo</a></li>
                 </ul>
             </div>
-
+    
+            <!-- Thanh tìm kiếm -->
             <div class="header-right">
                 <form action="#" method="GET">
                     <input type="text" placeholder="Tìm kiếm..." name="q">
                     <button type="submit">Tìm</button>
                 </form>
             </div>
+    
+            <!-- Nút đăng nhập/đăng ký -->
             <div class="fromxacthuc">
                 @if (Auth::check())
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="auth-btn logout-btn">Đăng Xuất</button>
                     </form>
-            @else
+                @else
                     <a href="{{ route('login') }}">
                         <button class="auth-btn login-btn">Đăng Nhập</button>
                     </a>
@@ -49,7 +54,7 @@
                     <a href="{{ route('password.request') }}">
                         <button class="auth-btn forgot-btn">Quên Mật Khẩu?</button>
                     </a>
-            @endif
+                @endif
             </div>
         </div>
     </header>
@@ -70,18 +75,24 @@
             </ul>
         </div>
     </nav>
-
+    @if(Route::is('index'))
+        <div class="banner">
+            <img src="{{ asset('images/BANNERHOTNEWS360.png') }}" alt="Banner Quảng Cáo">
+        </div>
+    @endif
     <main class="content">
         <article>@yield('noidung')</article>
         @include('aside')
     </main>
 
     <footer class="footer">
-        <div class="footer-logo">
-            <img src="{{ asset('images/HOTNEWS360.gif') }}" alt="">
-        </div>
-
-        <div class="footer-right">
+        <div class="footer-header">
+            <!-- Logo -->
+            <div class="footer-logo">
+                <img src="{{ asset('images/HOTNEWS360.gif') }}" alt="HOTNEWS360 Logo">
+            </div>
+    
+            <!-- Liên kết -->
             <div class="footer-links">
                 <ul>
                     <li><a href="{{ route('about') }}">Giới Thiệu</a></li>
@@ -89,7 +100,8 @@
                     <li><a href="{{ route('quangcao') }}">Quảng Cáo</a></li>
                 </ul>
             </div>
-
+    
+            <!-- Mạng xã hội -->
             <div class="footer-socials">
                 <a href="https://www.facebook.com/Autosubz.comm/" target="_blank" class="social-icon"><i
                         class="fab fa-facebook-f"></i></a>
@@ -101,9 +113,10 @@
                         class="fab fa-github"></i></a>
             </div>
         </div>
-
+    
+        <!-- Phần bản quyền -->
         <div class="footer-bottom">
-            <p>&copy; 2025 Lê Đức Mạnh. All rights reserved.</p>
+            <p>© 2025 Lê Đức Mạnh. All rights reserved.</p>
         </div>
     </footer>
 </body>

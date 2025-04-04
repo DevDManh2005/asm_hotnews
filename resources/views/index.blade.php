@@ -69,26 +69,41 @@
 </div>
 @endsection
 <style>
+/* 🌟 Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
 /* 🌟 Bố cục tổng thể */
 .container.home-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+    max-width: 1200px; /* Chiều rộng tối đa */
+    margin: 0 auto; /* Căn giữa container */
+    padding: 20px; /* Padding cố định */
+    background-color: #f9f9f9; /* Màu nền giống layout */
 }
 
 /* 🌟 Tiêu đề */
 h1 {
     text-align: center;
     font-size: 36px;
-    color: #1e3a8a; /* Màu xanh biển */
+    color: #007bff; /* Màu xanh dương đồng nhất */
     margin-bottom: 30px;
     font-weight: 700;
 }
 
 h2 {
-    font-size: 26px;
-    color: #1e3a8a; /* Màu xanh biển */
-    border-left: 5px solid #1e3a8a; /* Viền trái màu xanh biển */
+    font-size: 24px; /* Giảm kích thước tiêu đề phụ */
+    color: #007bff; /* Màu xanh dương đồng nhất */
+    border-left: 3px solid #007bff; /* Viền trái nhẹ nhàng */
     padding-left: 10px;
     margin-bottom: 20px;
     font-weight: 600;
@@ -96,79 +111,81 @@ h2 {
 
 /* 🌟 Khu vực bài viết */
 .news-section {
-    margin-bottom: 50px;
+    margin-bottom: 40px; /* Khoảng cách giữa các phần */
 }
 
 /* 🌟 Hiển thị bài viết theo dạng lưới */
 .news-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px; /* Khoảng cách giữa các bài viết */
-    row-gap: 40px; /* Khoảng cách giữa các hàng khi xuống dòng */
+    grid-template-columns: repeat(3, 1fr); /* 3 cột trên desktop */
+    gap: 25px; /* Khoảng cách giữa các bài viết */
+    row-gap: 30px; /* Khoảng cách giữa các hàng */
 }
 
 /* 🌟 Bài viết */
 .news-item {
     background: #fff; /* Nền trắng */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
+    padding: 15px; /* Padding cố định */
+    border-radius: 8px; /* Bo góc nhẹ nhàng */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
 }
 
 /* 🌟 Hiệu ứng hover cho bài viết */
 .news-item:hover {
-    transform: translateY(-10px); /* Nhấc lên khi hover */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Bóng đổ đậm hơn */
+    transform: translateY(-5px); /* Nhấc lên khi hover (nhẹ nhàng hơn) */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Bóng đổ đậm hơn */
 }
 
 /* 🌟 Hình ảnh bài viết */
 .news-item img {
     width: 100%;
-    height: 180px;
+    height: 160px; /* Chiều cao hình ảnh đồng nhất */
     object-fit: cover; /* Đảm bảo hình ảnh không bị méo */
-    border-radius: 10px;
+    border-radius: 8px; /* Bo góc nhẹ nhàng */
     transition: transform 0.3s ease;
 }
 
 .news-item img:hover {
-    transform: scale(1.05); /* Phóng to hình ảnh khi hover */
+    transform: scale(1.03); /* Phóng to hình ảnh khi hover (nhẹ nhàng hơn) */
 }
 
 /* 🌟 Nội dung bài viết */
 .news-item-content {
-    padding: 15px 0;
+    padding: 10px 0; /* Padding nội dung */
 }
 
 .news-item-content h3 {
-    font-size: 18px;
-    color: #1e3a8a; /* Màu xanh biển */
+    font-size: 16px; /* Kích thước tiêu đề bài viết */
+    color: #007bff; /* Màu xanh dương đồng nhất */
     margin: 10px 0;
     font-weight: 600;
     transition: color 0.3s;
 }
 
 .news-item-content h3:hover {
-    color: #E65100; /* Màu cam khi hover */
+    color: #ffcc00; /* Màu vàng nổi bật khi hover */
 }
 
 .news-item-content p {
     font-size: 14px;
     color: #555; /* Màu chữ nhạt */
-    margin: 10px 0;
+    margin: 5px 0; /* Giảm khoảng cách */
 }
 
 /* 🌟 Liên kết */
 .news-item a {
     text-decoration: none; /* Ẩn dấu gạch dưới */
+    color: inherit; /* Kế thừa màu sắc từ cha */
+    transition: color 0.3s ease;
 }
 
 .news-item a:hover {
-    opacity: 0.8; /* Làm mờ nhẹ khi hover */
+    color: #ffcc00; /* Màu vàng nổi bật khi hover */
 }
 
-/* 🌟 Responsive: Mobile hiển thị 1 cột, Tablet hiển thị 2 cột */
+/* 🌟 Responsive Design */
 @media (max-width: 1024px) {
     .news-grid {
         grid-template-columns: repeat(2, 1fr); /* 2 cột trên tablet */
@@ -182,6 +199,18 @@ h2 {
         grid-template-columns: repeat(1, 1fr); /* 1 cột trên mobile */
         gap: 15px; /* Giảm khoảng cách giữa các bài viết */
         row-gap: 20px; /* Khoảng cách giữa các hàng */
+    }
+
+    h1 {
+        font-size: 30px; /* Giảm kích thước tiêu đề */
+    }
+
+    h2 {
+        font-size: 20px; /* Giảm kích thước tiêu đề phụ */
+    }
+
+    .news-item img {
+        height: 140px; /* Giảm chiều cao hình ảnh */
     }
 }
 </style>

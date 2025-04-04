@@ -1,7 +1,8 @@
 @extends('layouts.layout')
-@section('title', 'Quảng Cáo')
-@section('noidung')
 
+@section('title', 'Quảng Cáo')
+
+@section('noidung')
 <div class="contact-container">
     <h1>Liên Hệ Quảng Cáo</h1>
     <p>Nếu bạn muốn hợp tác với chúng tôi để quảng bá sản phẩm hoặc dịch vụ của mình, vui lòng điền vào form dưới đây. Chúng tôi sẽ liên hệ lại với bạn trong thời gian sớm nhất!</p>
@@ -38,7 +39,9 @@
         </select>
 
         <label for="budget">Ngân sách dự kiến (VNĐ):</label>
-        <input type="number" id="budget" name="budget" placeholder="Nhập ngân sách dự kiến" required>
+        <div class="budget-input-container">
+            <input type="number" id="budget" name="budget" placeholder="Nhập ngân sách" required inputmode="numeric">
+        </div>
 
         <label for="duration">Thời gian chạy quảng cáo:</label>
         <input type="text" id="duration" name="duration" placeholder="Ví dụ: 1 tháng, 3 tháng..." required>
@@ -85,13 +88,11 @@
 <!-- Facebook SDK -->
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0" nonce="YOUR_NONCE_VALUE"></script>
-
 @endsection
-
 <style>
-   /* 🌟 Container chính */
+    /* 🌟 Container chính */
 .contact-container {
-    max-width: 1200px;
+    max-width: 1200px; /* Chiều rộng tối đa đồng nhất */
     margin: 40px auto; /* Căn giữa nội dung */
     padding: 30px; /* Padding rộng hơn */
     background: #fff; /* Nền trắng */
@@ -103,7 +104,7 @@
 /* 🌟 Tiêu đề lớn */
 .contact-container h1 {
     text-align: center;
-    color: #1e3a8a; /* Màu xanh biển thay vì cam */
+    color: #007bff; /* Màu xanh dương đồng nhất */
     margin-bottom: 30px;
     font-size: 36px;
     font-weight: 700;
@@ -127,9 +128,10 @@
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: #1e3a8a; /* Màu xanh biển */
+    color: #007bff; /* Màu xanh dương đồng nhất */
 }
 
+/* 🌟 Trường nhập liệu */
 .ad-form input[type="text"],
 .ad-form input[type="email"],
 .ad-form select,
@@ -151,14 +153,48 @@
 .ad-form input:focus,
 .ad-form select:focus,
 .ad-form textarea:focus {
-    border-color: #ff9800; /* Viền cam khi focus */
+    border-color: #007bff; /* Viền xanh dương khi focus */
     outline: none; /* Loại bỏ viền mặc định */
 }
 
+/* 🌟 Trường nhập liệu Ngân sách dự kiến */
+.budget-input-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.budget-input-container input {
+    width: 100%;
+    padding: 12px 80px 12px 15px; /* Padding phải rộng hơn để chứa ký hiệu VNĐ */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.budget-input-container input:focus {
+    border-color: #007bff; /* Viền xanh dương khi focus */
+    outline: none;
+}
+
+.budget-input-container::after {
+    content: "VNĐ"; /* Thêm ký hiệu VNĐ */
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #007bff; /* Màu xanh dương đồng nhất */
+    font-size: 14px;
+    font-weight: bold;
+    pointer-events: none; /* Đảm bảo không ảnh hưởng đến input */
+}
+
+/* 🌟 Nút gửi */
 .ad-form button {
     display: inline-block;
     padding: 12px 25px; /* Padding rộng hơn */
-    background: #ff9800; /* Màu cam */
+    background: #007bff; /* Màu xanh dương đồng nhất */
     color: white;
     font-size: 18px;
     border: none;
@@ -168,7 +204,7 @@
 }
 
 .ad-form button:hover {
-    background: #e65100; /* Màu cam đậm khi hover */
+    background: #0056b3; /* Màu xanh dương đậm khi hover */
 }
 
 /* 🌟 Section Divider */
@@ -224,4 +260,35 @@
         width: 100%; /* Chiếm toàn bộ chiều rộng trên màn hình nhỏ */
     }
 }
-    </style>
+
+@media (max-width: 768px) {
+    .contact-container h1 {
+        font-size: 30px; /* Giảm kích thước tiêu đề */
+    }
+
+    .contact-container p {
+        font-size: 16px; /* Giảm kích thước đoạn văn */
+    }
+
+    .ad-form input[type="text"],
+    .ad-form input[type="email"],
+    .ad-form select,
+    .ad-form textarea {
+        font-size: 14px; /* Giảm kích thước input */
+    }
+
+    .budget-input-container input {
+        padding: 10px 60px 10px 10px; /* Giảm padding */
+    }
+
+    .budget-input-container::after {
+        font-size: 12px; /* Giảm kích thước ký hiệu VNĐ */
+        right: 10px; /* Dịch chuyển ký hiệu VNĐ */
+    }
+
+    .google-map iframe,
+    .fb-page {
+        height: 350px; /* Giảm chiều cao map và plugin */
+    }
+}
+</style>

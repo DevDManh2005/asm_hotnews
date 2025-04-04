@@ -3,58 +3,56 @@
 @section('title', 'Chi Tiết Bài Viết - ' . $news->title)
 
 @section('noidung')
-    <div class="post-detail">
-        <!-- Tiêu đề và thông tin bài viết -->
-        <div class="post-header">
-            <h1>{{ $news->title }}</h1>
-            <p class="post-meta">
-                <span>Đăng ngày: {{ $news->created_at->format('d/m/Y') }}</span>
-                <span>Danh mục: <a href="{{ route('category.show', $news->category->slug) }}">{{ $news->category->name }}</a></span>
+<div class="post-detail">
+    <!-- Tiêu đề và thông tin bài viết -->
+    <div class="post-header">
+        <h1>{{ $news->title }}</h1>
+        <p class="post-meta">
+            <span>Đăng ngày: {{ $news->created_at->format('d/m/Y') }}</span>
+            <span>Danh mục: <a href="{{ route('category.show', $news->category->slug) }}">{{ $news->category->name }}</a></span>
+        </p>
+    </div>
 
-            </p>
-        </div>
-
-        <!-- Nội dung bài viết -->
-        <div class="post-content">
-            @if ($news->image)
-            <img src="{{ asset($news->image) }}" alt="{{ $news->title }}"class="post-image">
-            @else
-                <div class="post-image-placeholder"></div> <!-- Hiển thị placeholder nếu không có ảnh -->
-            @endif
-            <div class="content">
-                {!! $news->content !!}
-            </div>
-        </div>
-
-        <!-- Bình luận -->
-        <div class="post-comments">
-            <h3>Bình luận</h3>
-            @foreach ($news->comments as $comment)
-                <div class="comment">
-                    <p><strong>{{ $comment->author }}</strong> ({{ $comment->created_at->format('d/m/Y') }})</p>
-                    <p>{{ $comment->content }}</p>
-                </div>
-            @endforeach
-        </div>
-
-        <!-- Form thêm bình luận -->
-        <div class="comment-form">
-            <h3>Thêm Bình Luận</h3>
-            <form action="{{ route('comments.store', $news->slug) }}" method="POST">
-                @csrf
-                <div class="form-group">
-                    <textarea name="content" rows="4" placeholder="Viết bình luận của bạn..." required></textarea>
-                </div>
-                <button type="submit">Gửi Bình Luận</button>
-            </form>
+    <!-- Nội dung bài viết -->
+    <div class="post-content">
+        @if ($news->image)
+        <img src="{{ asset($news->image) }}" alt="{{ $news->title }}" class="post-image">
+        @else
+            <div class="post-image-placeholder">Không có hình ảnh</div>
+        @endif
+        <div class="content">
+            {!! $news->content !!}
         </div>
     </div>
-@endsection
 
+    <!-- Bình luận -->
+    <div class="post-comments">
+        <h3>Bình luận</h3>
+        @foreach ($news->comments as $comment)
+            <div class="comment">
+                <p><strong>{{ $comment->author }}</strong> ({{ $comment->created_at->format('d/m/Y') }})</p>
+                <p>{{ $comment->content }}</p>
+            </div>
+        @endforeach
+    </div>
+
+    <!-- Form thêm bình luận -->
+    <div class="comment-form">
+        <h3>Thêm Bình Luận</h3>
+        <form action="{{ route('comments.store', $news->slug) }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <textarea name="content" rows="4" placeholder="Viết bình luận của bạn..." required></textarea>
+            </div>
+            <button type="submit">Gửi Bình Luận</button>
+        </form>
+    </div>
+</div>
+@endsection
 <style>
-   /* 🌟 Chi Tiết Bài Viết */
+    /* 🌟 Chi Tiết Bài Viết */
 .post-detail {
-    max-width: 1200px;
+    max-width: 1200px; /* Chiều rộng tối đa đồng nhất */
     margin: 40px auto;
     background-color: #fff; /* Nền trắng */
     padding: 30px; /* Padding rộng hơn */
@@ -72,7 +70,7 @@
 
 .post-header h1 {
     font-size: 36px;
-    color: #1e3a8a; /* Màu xanh biển */
+    color: #007bff; /* Màu xanh dương đồng nhất */
     font-weight: 700;
     margin-bottom: 15px;
 }
@@ -147,7 +145,7 @@
 
 .post-comments h3 {
     font-size: 28px;
-    color: #1e3a8a; /* Màu xanh biển */
+    color: #007bff; /* Màu xanh dương đồng nhất */
     margin-bottom: 25px;
     font-weight: 700;
 }
@@ -174,7 +172,7 @@
 
 .comment strong {
     font-weight: bold;
-    color: #1e3a8a; /* Màu xanh biển */
+    color: #007bff; /* Màu xanh dương đồng nhất */
 }
 
 /* 🌟 Form bình luận */
@@ -261,6 +259,11 @@
     .comment-form button {
         font-size: 14px;
         padding: 10px 20px;
+    }
+
+    .post-image,
+    .post-image-placeholder {
+        height: 300px; /* Giảm chiều cao hình ảnh */
     }
 }
 </style>

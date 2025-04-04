@@ -1,5 +1,7 @@
 @extends('layouts.layout')
+
 @section('title', 'Liên Hệ')
+
 @section('noidung')
 <div class="contact-container">
     <h1>Liên Hệ với chúng tôi</h1>
@@ -8,6 +10,7 @@
     <!-- Contact Form -->
     <form class="contact-form" action="/submit-contact" method="POST">
         @csrf <!-- Thêm token CSRF nếu bạn đang sử dụng Laravel -->
+
         <label for="name">Họ và tên:</label>
         <input type="text" id="name" name="name" placeholder="Nhập họ và tên của bạn" required>
 
@@ -58,13 +61,12 @@
 <!-- Facebook SDK -->
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0" nonce="YOUR_NONCE_VALUE"></script>
-
 @endsection
 
 <style>
 /* 🌟 Container chính */
 .contact-container {
-    max-width: 1200px;
+    max-width: 1200px; /* Chiều rộng tối đa đồng nhất */
     margin: 40px auto; /* Căn giữa nội dung */
     padding: 30px; /* Padding rộng hơn */
     background: #fff; /* Nền trắng */
@@ -76,7 +78,7 @@
 /* 🌟 Tiêu đề lớn */
 .contact-container h1 {
     text-align: center;
-    color: #1e3a8a; /* Màu xanh biển thay vì cam */
+    color: #007bff; /* Màu xanh dương đồng nhất */
     margin-bottom: 30px;
     font-size: 36px;
     font-weight: 700;
@@ -100,9 +102,10 @@
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: #1e3a8a; /* Màu xanh biển */
+    color: #007bff; /* Màu xanh dương đồng nhất */
 }
 
+/* 🌟 Trường nhập liệu */
 .contact-form input[type="text"],
 .contact-form input[type="email"],
 .contact-form textarea {
@@ -122,14 +125,15 @@
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-    border-color: #ff9800; /* Viền cam khi focus */
+    border-color: #007bff; /* Viền xanh dương khi focus */
     outline: none; /* Loại bỏ viền mặc định */
 }
 
+/* 🌟 Nút gửi */
 .contact-form button {
     display: inline-block;
     padding: 12px 25px; /* Padding rộng hơn */
-    background: #ff9800; /* Màu cam */
+    background: #007bff; /* Màu xanh dương đồng nhất */
     color: white;
     font-size: 18px;
     border: none;
@@ -139,7 +143,7 @@
 }
 
 .contact-form button:hover {
-    background: #e65100; /* Màu cam đậm khi hover */
+    background: #0056b3; /* Màu xanh dương đậm khi hover */
 }
 
 /* 🌟 Flexbox Layout cho Google Map và Facebook Plugin */
@@ -187,6 +191,27 @@
     .google-map,
     .fb-page-container {
         width: 100%; /* Chiếm toàn bộ chiều rộng trên màn hình nhỏ */
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-container h1 {
+        font-size: 30px; /* Giảm kích thước tiêu đề */
+    }
+
+    .contact-container p {
+        font-size: 16px; /* Giảm kích thước đoạn văn */
+    }
+
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form textarea {
+        font-size: 14px; /* Giảm kích thước input */
+    }
+
+    .google-map iframe,
+    .fb-page {
+        height: 350px; /* Giảm chiều cao map và plugin */
     }
 }
     </style>

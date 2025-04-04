@@ -1,261 +1,289 @@
-/* ---------------------- Layout CSS ---------------------- */
-
-/* 🌟 Toàn bộ trang */
-body {
-    font-family: 'Arial', sans-serif;
+/* Reset CSS */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f0f8ff; /* Màu nền xanh nhạt */
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
     color: #333;
 }
 
-/* 🌟 Header */
+/* Header Section */
 .header {
-    background-color: #1e3a8a; /* Màu xanh biển đậm */
-    padding: 20px 0;
-    display: flex;
-    justify-content: space-between; /* Phân bổ không gian giữa các phần tử */
-    align-items: center; /* Căn chỉnh các phần tử theo chiều dọc */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* 🌟 Logo */
-.header-logo img {
-    max-width: 150px;
-    margin-left: 20px; /* Khoảng cách bên trái */
-}
-
-/* 🌟 Nội dung header */
-.header-content {
     display: flex;
     align-items: center; /* Căn giữa theo chiều dọc */
-    gap: 20px; /* Khoảng cách giữa các phần tử */
-    margin-right: 20px; /* Khoảng cách bên phải */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    padding: 15px 20px; /* Padding chung cho header */
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative; /* Để có thể sử dụng absolute cho các phần tử con */
 }
 
-/* 🌟 Menu trái */
-.header-left ul {
-    list-style-type: none;
+/* Wrapper để căn giữa nội dung */
+.header-wrapper {
     display: flex;
-    gap: 20px;
-    margin: 0;
-    padding: 0;
+    align-items: center;
+    justify-content: space-between; /* Phân bổ khoảng cách giữa các phần tử */
+    width: 100%; /* Chiếm toàn bộ chiều rộng của header */
+    max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+}
+
+/* Logo */
+.header-logo img {
+    width: 150px;
+    height: auto;
+}
+
+/* Menu */
+.header-left ul {
+    list-style: none;
+    display: flex;
+    gap: 20px; /* Khoảng cách giữa các mục menu */
+    margin: 0; /* Loại bỏ margin mặc định */
+    padding: 0; /* Loại bỏ padding mặc định */
 }
 
 .header-left ul li a {
-    color: white;
     text-decoration: none;
+    color: #333;
     font-weight: bold;
-    transition: color 0.3s;
+    transition: color 0.3s ease;
 }
 
 .header-left ul li a:hover {
-    color: #ff9800; /* Màu cam khi hover */
+    color: #007bff;
 }
 
-/* 🌟 Phần đăng nhập/đăng ký/đăng xuất */
-.fromxacthuc {
-    display: flex;
-    flex-direction: column; /* Sắp xếp các nút theo chiều dọc */
-    gap: 10px; /* Khoảng cách giữa các nút */
-    align-items: flex-end; /* Căn phải các nút */
-    margin-top: 10px; /* Khoảng cách từ phần trên */
-}
-
-.fromxacthuc a, .fromxacthuc form {
+/* Thanh tìm kiếm */
+.header-right form {
     display: flex;
     align-items: center;
+}
+
+.header-right input[type="text"] {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+
+.header-right button[type="submit"] {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.header-right button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Đăng nhập/Đăng ký */
+.fromxacthuc {
+    display: flex;
+    gap: 10px; /* Khoảng cách giữa các nút */
 }
 
 .auth-btn {
-    padding: 8px 16px; /* Giảm kích thước nút */
-    border-radius: 6px;
-    font-size: 12px; /* Giảm kích thước chữ */
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    padding: 8px 15px;
     border: none;
-    text-transform: uppercase; /* Chữ in hoa */
-    min-width: 120px; /* Giảm chiều rộng tối thiểu */
-    background-color: #ff9800; /* Màu cam duy nhất */
-    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.login-btn {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.register-btn {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.logout-btn {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.forgot-btn {
+    background-color: #ffc107;
+    color: #000;
 }
 
 .auth-btn:hover {
-    opacity: 0.9; /* Hiệu ứng mờ khi hover */
+    opacity: 0.9;
 }
-
-/* Hiệu ứng focus cho nút */
-.auth-btn:focus {
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
-
-/* 🌟 Tìm kiếm */
-.header-right form {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.header-right input {
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    width: 200px; /* Chiều rộng của ô tìm kiếm */
-}
-
-.header-right button {
-    padding: 8px 12px;
-    background-color: #ff9800;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    color: white;
-    transition: background-color 0.3s;
-}
-
-.header-right button:hover {
-    background-color: #e65100; /* Màu cam đậm khi hover */
-}
-/* ---------------------- Navbar ---------------------- */
+/* Navigation Section */
 .main-nav {
-    background-color: #1e3a8a; /* Xanh biển */
-    padding: 10px 0;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    background-color: #007bff;
+    padding: 10px 0; /* Đổi padding để không bị lệch khi căn giữa */
+    text-align: center; /* Căn giữa nội dung bên trong */
+}
+
+.categories-sidebar ul {
+    list-style: none;
+    display: inline-flex; /* Chuyển sang inline-flex để căn giữa */
+    gap: 15px;
+    justify-content: center; /* Đảm bảo các mục được căn giữa */
+    flex-wrap: wrap; /* Cho phép các mục xuống dòng nếu màn hình nhỏ */
+}
+
+.categories-sidebar ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.categories-sidebar ul li a:hover {
+    color: #ffcc00;
+}
+
+/* Banner Section */
+.banner {
+    width: 1200px; /* Chiều rộng cố định */
+    height: 400px;
+    margin: 20px auto; /* Căn giữa */
+    overflow: hidden;
+    border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.main-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
+.banner img {
+    width: 100%; /* Chiều rộng đầy đủ */
+    height: 100%; /* Chiều cao đầy đủ */
+    object-fit: cover; /* Giữ nguyên tỷ lệ khung hình và cắt ảnh nếu cần */
+    display: block; /* Loại bỏ khoảng cách thừa dưới ảnh */
 }
 
-.main-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 16px;
-    transition: color 0.3s;
-}
-
-.main-nav ul li a:hover {
-    color: #ff9800;
-}
-
-/* ---------------------- Main Content ---------------------- */
+/* Main Content Section */
 .content {
-    max-width: 1200px;
-    margin: 20px auto;
     display: flex;
-    gap: 40px;
-}
-
-/* Content Article */
-article {
-    width: 70%; /* Tăng chiều rộng nội dung chính */
-    background-color: white; /* Nền trắng */
     padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    gap: 20px;
 }
 
-/* ---------------------- Footer ---------------------- */
+article {
+    flex: 3;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+aside {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+/* Footer Section */
 .footer {
-    background-color: #1e3a8a; /* Màu xanh biển đậm */
-    color: white;
-    padding: 20px 0;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: left;
-    position: relative;
+    flex-direction: column; /* Bố cục cột */
+    background-color: #f9fafb; /* Màu nền tươi sáng */
+    color: #333; /* Màu chữ tối */
+    padding: 40px 20px; /* Padding chung cho footer */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Header trong Footer (Logo, Links, Socials) */
+.footer-header {
+    display: flex;
+    align-items: center; /* Căn giữa theo chiều dọc */
+    justify-content: space-between; /* Phân bổ khoảng cách đều nhau */
+    max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+    margin: 0 auto; /* Căn giữa nội dung */
+    padding: 0 20px; /* Padding hai bên */
+    gap: 40px; /* Khoảng cách lớn hơn giữa các phần tử */
+}
+
+/* Logo Footer */
 .footer-logo img {
-    max-width: 150px;
-    margin-left: 200px; /* Cách bên trái 200px */
+    width: 180px; /* Logo to hơn */
+    height: auto;
 }
 
-.footer-right {
-    display: flex;
-    gap: 30px;
-    margin-right: 200px; /* Cách bên phải 200px */
-}
-
+/* Liên kết Footer */
 .footer-links ul {
-    list-style-type: none;
+    list-style: none;
     display: flex;
-    gap: 30px;
+    gap: 30px; /* Khoảng cách lớn hơn giữa các liên kết */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    margin: 0; /* Loại bỏ margin mặc định */
+    padding: 0; /* Loại bỏ padding mặc định */
 }
 
 .footer-links ul li a {
-    color: white;
     text-decoration: none;
+    color: #333;
     font-weight: bold;
-    transition: color 0.3s;
+    transition: color 0.3s ease;
 }
 
 .footer-links ul li a:hover {
-    color: #ff9800; /* Màu cam khi hover */
+    color: #007bff; /* Hiệu ứng hover màu xanh dương */
 }
 
+/* Biểu tượng mạng xã hội */
 .footer-socials {
     display: flex;
-    gap: 15px;
-    margin-top: 13px;
+    gap: 25px; /* Khoảng cách lớn hơn giữa các biểu tượng */
+    align-items: center; /* Căn giữa theo chiều dọc */
 }
 
-.footer-socials .social-icon {
-    color: white;
-    font-size: 20px;
-    margin: 0;
-    transition: color 0.3s;
+.social-icon {
+    color: #333;
+    font-size: 22px; /* Icon to hơn */
+    transition: color 0.3s ease;
 }
 
-.footer-socials .social-icon:hover {
-    color: #ff9800;
+.social-icon:hover {
+    color: #007bff; /* Hiệu ứng hover màu xanh dương */
 }
 
-/* Thêm phần căn giữa cho © 2025 Lê Đức Mạnh */
+/* Phần bản quyền */
 .footer-bottom {
-    position: absolute;
-    bottom: 0px; /* Đặt phần này ở dưới cùng của footer */
-    left: 50%;
-    transform: translateX(-50%); /* Căn giữa phần văn bản */
-    font-size: 14px;
-    color: #ccc;
-    text-align: center;
-    width: 100%; /* Chiếm toàn bộ chiều rộng của footer */
+    text-align: center; /* Căn giữa phần bản quyền */
+    margin-top: 30px; /* Khoảng cách lớn hơn trên phần bản quyền */
+    width: 100%;
+    padding-top: 20px; /* Thêm padding để tách biệt phần bản quyền */
+    border-top: 1px solid rgba(0, 0, 0, 0.1); /* Đường viền mờ để phân chia */
 }
 
-/* ---------------------- Responsive Design ---------------------- */
+.footer-bottom p {
+    font-size: 14px;
+    color: #666; /* Màu chữ nhạt hơn */
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-    .content {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .main-nav ul {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .ad-sample-list {
-        flex-direction: column;
-    }
-
-    .footer {
+    .header-content {
         flex-direction: column;
         align-items: flex-start;
-        text-align: left;
+    }
+
+    .header-left ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .content {
+        flex-direction: column;
+    }
+
+    article, aside {
+        flex: 1;
     }
 }
