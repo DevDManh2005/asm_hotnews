@@ -24,6 +24,6 @@ class HomeController extends Controller
     
         // Trả về view index.blade.php với dữ liệu
         return view('index', compact('categories', 'latestNews', 'hotNews', 'newsByCategory'));
+
     }
-    
 }
