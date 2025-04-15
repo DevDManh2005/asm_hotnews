@@ -18,17 +18,17 @@
             <div class="header-logo">
                 <img src="{{ asset('images/HOTNEWS360.gif') }}" alt="HOTNEWS360 Logo">
             </div>
-    
+
             <!-- Menu -->
             <div class="header-left">
                 <ul>
                     <li><a href="/">Trang Chủ</a></li>
                     <li><a href="{{ route('about') }}">Giới Thiệu</a></li>
                     <li><a href="{{ route('contact') }}">Liên Hệ</a></li>
-                    <li><a href="{{ route('quangcao') }}">Quảng Cáo</a></li>
+
                 </ul>
             </div>
-    
+
             <!-- Thanh tìm kiếm -->
             <div class="header-right">
                 <form action="#" method="GET">
@@ -36,11 +36,19 @@
                     <button type="submit">Tìm</button>
                 </form>
             </div>
-    
-            <!-- Nút đăng nhập/đăng ký -->
+
+            <!-- Nút đăng nhập/đăng ký hoặc Tài khoản -->
             <div class="fromxacthuc">
                 @if (Auth::check())
-                    <form action="{{ route('logout') }}" method="POST">
+                    <a href="{{ route('profile') }}">
+                        <button class="auth-btn account-btn">Tài Khoản</button>
+                    </a>
+                    @if(Auth::user()->role == 'admin')
+                        <a href="{{ route('admin.dashboard') }}">
+                            <button class="auth-btn admin-btn">Quản Trị</button>
+                        </a>
+                    @endif
+                    <form action="{{ route('logout') }}" method="POST" style="display:inline;">
                         @csrf
                         <button type="submit" class="auth-btn logout-btn">Đăng Xuất</button>
                     </form>
@@ -60,7 +68,6 @@
     </header>
 
     <nav class="main-nav">
-        <!-- Hiển thị danh sách danh mục -->
         <div class="categories-sidebar">
             <ul>
                 @if(isset($categories) && $categories->count() > 0)
@@ -75,72 +82,32 @@
             </ul>
         </div>
     </nav>
-    @if(Route::is('index'))
-        <div class="banner">
-            <img src="{{ asset('images/BANNERHOTNEWS360.png') }}" alt="Banner Quảng Cáo">
-        </div>
-    @endif
     <main class="content">
         <article>@yield('noidung')</article>
+    
+        @if (!in_array(Route::currentRouteName(), ['login', 'register', 'password.request', 'about', 'contact']))
         <aside>
-            <h2>Các Mẫu Quảng Cáo Đã Thực Hiện</h2>
-            <div class="ad-sample-list">
-                <div class="ad-sample-item">
-                    <div class="image-placeholder">
-                        <img src="{{ asset('storage/images/banner.jpg') }}" alt="Quảng cáo Banner">
+            <div class="sidebar-right">
+                @foreach ($ads as $ad)
+                    <div class="ad-item">
+                        <img src="{{ asset($ad->image) }}" alt="{{ $ad->title }}" class="ad-image">
+                        <h3>{{ $ad->title }}</h3>
+                        <p>{{ $ad->description }}</p>
+                        <a href="{{ $ad->link }}" target="_blank" class="btn btn-primary">Xem Chi Tiết</a>
                     </div>
-                    <h3>Quảng cáo Banner</h3>
-                    <p>Mẫu quảng cáo banner hiển thị ở đầu trang web.</p>
-                    <a href="#">Xem chi tiết</a>
-                </div>
-        
-                <div class="ad-sample-item">
-                    <div class="image-placeholder">
-                        <img src="{{ asset('storage/images/popup.jpg') }}" alt="Quảng cáo Pop-up">
-                    </div>
-                    <h3>Quảng cáo Pop-up</h3>
-                    <p>Mẫu quảng cáo pop-up xuất hiện khi người dùng truy cập.</p>
-                    <a href="#">Xem chi tiết</a>
-                </div>
-        
-                <div class="ad-sample-item">
-                    <div class="image-placeholder">
-                        <img src="{{ asset('storage/images/video.jpg') }}" alt="Quảng cáo Video">
-                    </div>
-                    <h3>Quảng cáo Video</h3>
-                    <p>Mẫu quảng cáo video ngắn gọn, hấp dẫn.</p>
-                    <a href="#">Xem chi tiết</a>
-                </div>
-        
-                <div class="ad-sample-item">
-                    <div class="image-placeholder">
-                        <img src="{{ asset('storage/images/social.jpg') }}" alt="Quảng cáo trên mạng xã hội">
-                    </div>
-                    <h3>Quảng cáo trên mạng xã hội</h3>
-                    <p>Mẫu quảng cáo tối ưu hóa cho Facebook, Instagram.</p>
-                    <a href="#">Xem chi tiết</a>
-                </div>
-        
-                <div class="ad-sample-item">
-                    <div class="image-placeholder">
-                        <img src="{{ asset('storage/images/native.jpg') }}" alt="Quảng cáo Native">
-                    </div>
-                    <h3>Quảng cáo Native</h3>
-                    <p>Mẫu quảng cáo tích hợp tự nhiên vào nội dung trang web.</p>
-                    <a href="#">Xem chi tiết</a>
-                </div>
+                @endforeach
             </div>
         </aside>
+        @endif
     </main>
+    
+
 
     <footer class="footer">
         <div class="footer-header">
-            <!-- Logo -->
             <div class="footer-logo">
                 <img src="{{ asset('images/HOTNEWS360.gif') }}" alt="HOTNEWS360 Logo">
             </div>
-    
-            <!-- Liên kết -->
             <div class="footer-links">
                 <ul>
                     <li><a href="{{ route('about') }}">Giới Thiệu</a></li>
@@ -148,8 +115,6 @@
                     <li><a href="{{ route('quangcao') }}">Quảng Cáo</a></li>
                 </ul>
             </div>
-    
-            <!-- Mạng xã hội -->
             <div class="footer-socials">
                 <a href="https://www.facebook.com/Autosubz.comm/" target="_blank" class="social-icon"><i
                         class="fab fa-facebook-f"></i></a>
@@ -161,8 +126,6 @@
                         class="fab fa-github"></i></a>
             </div>
         </div>
-    
-        <!-- Phần bản quyền -->
         <div class="footer-bottom">
             <p>© 2025 Lê Đức Mạnh. All rights reserved.</p>
         </div>

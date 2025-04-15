@@ -6,12 +6,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use App\Models\User;
-
+use App\Models\Ad;  // Import Ad model
 class AuthController extends Controller
 {
     public function showRegisterForm()
-    {
+    { 
         return view('auth.register');
+        
     }
 
     public function register(Request $request)
@@ -38,17 +39,32 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        // Xác thực dữ liệu đầu vào
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
+        
+        // Kiểm tra đăng nhập và xác thực
         if (Auth::attempt($credentials)) {
-            return redirect('/')->with('success', 'Đăng nhập thành công!');
+            // Sau khi đăng nhập thành công, kiểm tra vai trò
+            $user = Auth::user();
+            
+            // Kiểm tra vai trò của người dùng và chuyển hướng tương ứng
+            if ($user->role == 'admin') {
+                // Nếu là admin, chuyển hướng đến trang quản lý admin
+                return redirect()->route('admin.dashboard')->with('success', 'Đăng nhập thành công!');
+            } elseif ($user->role == 'user') {
+                // Nếu là user, chuyển hướng về trang chủ
+                return redirect('/')->with('success', 'Đăng nhập thành công!');
+            }
         }
-
+        
+        // Nếu không thành công, trả về thông báo lỗi
         return back()->withErrors(['email' => 'Thông tin đăng nhập không chính xác.']);
     }
+    
+    
 
     public function logout()
     {

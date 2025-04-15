@@ -2,19 +2,31 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    // Nếu bảng sử dụng tên khác, bạn có thể chỉ định tên bảng ở đây
-    protected $table = 'comments'; // Tên bảng nếu không theo quy tắc của Laravel
+    use HasFactory;
 
-    // Các trường có thể gán đại trà
-    protected $fillable = ['author', 'content', 'news_id'];
+    protected $fillable = [
+        'user_id',
+        'news_id',
+        'content',
+        'rating',
+        'likes',
+        'shares'
+    ];
 
-    // Mối quan hệ với bài viết (News)
+    // Quan hệ với bảng User
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    // Quan hệ với bảng News
     public function news()
     {
-        return $this->belongsTo(News::class, 'news_id'); // Sử dụng 'news_id' làm khóa ngoại
+        return $this->belongsTo(News::class);
     }
 }

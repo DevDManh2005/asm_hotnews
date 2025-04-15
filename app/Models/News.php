@@ -9,9 +9,7 @@ class News extends Model
 {
     use HasFactory;
 
-   // Trong News.php (Mô hình News)
-protected $fillable = ['title', 'content', 'category_id', 'image']; // Đảm bảo có 'image' trong mảng này
-
+    protected $fillable = ['title', 'content', 'slug', 'views', 'image', 'category_id'];
 
     // Liên kết với danh mục
     public function category()
@@ -22,6 +20,6 @@ protected $fillable = ['title', 'content', 'category_id', 'image']; // Đảm b�
     // Liên kết với bình luận
     public function comments()
     {
-        return $this->hasMany(Comment::class, 'news_id'); // Chỉ định rõ khóa ngoại là 'news_id'
+        return $this->hasMany(Comment::class, 'news_id');
     }
 }
