@@ -11,9 +11,29 @@
 </head>
 
 <body>
-    <div class="banner_chinh">
-        <img src="{{ asset('images/banner30-4.jpg') }}" alt="Banner" class="banner-img">
-    </div>
+
+    <!-- Phần banner chính chỉ hiển thị trên trang chủ -->
+    @if(Request::is('/'))
+        <div class="banner_chinh">
+            <div class="slider-banner">
+                <div class="slider-banner-chinh">
+                    <div class="slide">
+                        <img src="{{ asset('images/banner30-4.jpg') }}" alt="Banner 1" class="banner-img">
+                    </div>
+                    <div class="slide">
+                        <img src="{{ asset('images/HOTNEWS360_banner1.gif') }}" alt="Banner 2" class="banner-img">
+                    </div>
+                    <div class="slide">
+                        <img src="{{ asset('images/LDM.gif') }}" alt="Banner 3"
+                            class="banner-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+
+
     <!-- Phần đầu trang -->
     <header class="header">
         <div class="container">
@@ -22,11 +42,9 @@
                 <img src="{{ asset('images/HOTNEWS360.gif') }}" alt="Logo HOTNEWS360" class="logo-img">
             </div>
 
-            <!-- Hộp tìm kiếm -->
-            <form action="{{ route('news.search') }}" method="get" class="search-form">
-                <input type="text" name="q" value="{{ request('q') }}" placeholder="Tìm kiếm bài viết..."
-                    class="search-input">
-                <button type="submit" class="search-button">Tìm kiếm</button>
+            <form method="GET" action="{{ route('news.search') }}">
+                <input type="text" name="query" placeholder="Tìm kiếm..." value="{{ request()->input('query') }}">
+                <button type="submit">Tìm kiếm</button>
             </form>
 
             <!-- Nút Đăng nhập/Đăng ký/Thoát -->
@@ -39,7 +57,6 @@
                     </div>
                     <a href="{{ route('profile') }}" class="btn-profile"><button>Tài Khoản</button></a>
                     @if(Auth::user()->role == 'admin')
-
                         <a href="{{ route('admin.dashboard') }}" class="btn-admin"><button>Quản Trị</button></a>
                     @endif
                     <form action="{{ route('logout') }}" method="POST" class="logout-form">
@@ -49,7 +66,8 @@
                 @else
                     <a href="{{ route('login') }}" class="btn-login"><button>Đăng Nhập</button></a>
                     <a href="{{ route('register') }}" class="btn-register"><button>Đăng Ký</button></a>
-                    <a href="{{ route('password.request') }}" class="btn-forgot-password"><button>Quên Mật Khẩu?</button></a>
+                    <a href="{{ route('password.request') }}" class="btn-forgot-password"><button>Quên Mật
+                            Khẩu?</button></a>
                 @endif
             </div>
         </div>
@@ -72,26 +90,29 @@
             </ul>
         </div>
     </nav>
-    <!-- Phần banner -->
-    <div class="banner_phu">
-        <img src="{{ asset('images/bannerphu.jpg') }}" alt="Banner" class="banner-img">
-    </div>
+
+    <!-- Phần banner phụ chỉ hiển thị trên trang chủ -->
+    @if(Request::is('/'))
+        <div class="banner_phu">
+            <img src="{{ asset('images/bannerphu.jpg') }}" alt="Banner" class="banner-img">
+        </div>
+    @endif
 
     <main class="main-content">
+
         <!-- Bài viết chính -->
         <article>
             <section>
                 @yield('noidung') <!-- Nội dung bài viết sẽ được chèn vào đây -->
             </section>
         </article>
-    
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <h2>Bản tin</h2> <!-- Tiêu đề của sidebar -->
-            <!-- Bạn có thể thêm nội dung khác cho sidebar ở đây -->
+
+        <!-- Sidebar phải -->
+        <aside class="sidebar-right">
+            <h2>kaka</h2>
         </aside>
+
     </main>
-    
 
     <!-- Phần chân trang -->
     <footer class="footer">
@@ -122,3 +143,26 @@
 </body>
 
 </html>
+<script>
+    let currentIndex = 0;
+
+// Hàm di chuyển slide
+function moveSlide(direction, sliderContainer) {
+    const slides = sliderContainer.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+
+    // Cập nhật chỉ số slide hiện tại
+    currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
+
+    // Di chuyển slider
+    sliderContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+// Lấy tất cả các slider và gán sự kiện
+document.addEventListener("DOMContentLoaded", function() {
+    const sliderContainer = document.querySelector('.slider-banner-chinh');
+
+    setInterval(() => moveSlide(1, sliderContainer), 5000);
+});
+
+</script>

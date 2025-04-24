@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 
 class NewsController extends Controller
@@ -170,24 +171,23 @@ class NewsController extends Controller
         return view('news.show', compact('news', 'comments', 'categories', 'recentArticlesList'));
     }
     // Tìm kiếm bài viết
-    // SearchController.php hoặc controller của bạn
     public function search(Request $request)
     {
-        $query = $request->input('q'); // Lấy từ khóa tìm kiếm từ request
+        $query = $request->input('query'); // Lấy từ khóa tìm kiếm từ request
     
         if ($query) {
-            // Tìm kiếm trong title và content của bài viết
+            // Tìm kiếm trong title, content và slug của bài viết
             $news = News::where('title', 'like', "%$query%")
                         ->orWhere('content', 'like', "%$query%")
-                        ->paginate(10); // Phân trang kết quả
+                        ->orWhere('slug', 'like', "%$query%")
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(10); // Phân trang kết quả với 10 bài mỗi trang
         } else {
             $news = collect(); // Trả về một tập hợp rỗng nếu không có từ khóa
         }
     
-        return view('news.search_results', compact('news', 'query')); // Trả về view với kết quả
+        // Trả về view với kết quả tìm kiếm và từ khóa
+        return view('news.search_results', compact('news', 'query')); 
     }
     
-
-
-
 }

@@ -25,7 +25,9 @@ Route::get('/news/{slug}', [NewsController::class, 'show'])->name('news.show'); 
 // Route tìm kiếm bài viết
 // ----------------------------
 
-Route::get('/search', [NewsController::class, 'search'])->name('news.search');
+Route::get('/search', [NewsController::class, 'search'])->name('news.search'); // Tìm kiếm bài viết
+
+
 
 
 

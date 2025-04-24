@@ -17,12 +17,40 @@ body {
 /* Banner chính */
 .banner_chinh {
     margin: 10px;
-}
-
-.banner_chinh img {
+    position: relative;
     width: 100%; /* Chiều rộng đầy đủ */
     height: 500px; /* Chiều cao của banner */
+    overflow: hidden; /* Ẩn phần ảnh ngoài khung */
 }
+
+/* Slider container */
+.slider-banner {
+    position: relative;
+    width: 100%;
+    height: 500px;
+}
+
+/* Slider */
+.slider-banner-chinh {
+    display: flex; /* Xếp các slide theo hàng ngang */
+    transition: transform 0.5s ease; /* Thêm hiệu ứng di chuyển giữa các ảnh */
+}
+
+/* Mỗi ảnh trong slider */
+.slide {
+    flex-shrink: 0; /* Giữ cho mỗi ảnh không thay đổi kích thước */
+    width: 100%; /* Chiều rộng của mỗi slide chiếm toàn bộ chiều rộng của container */
+    height: 500px; /* Chiều cao của mỗi slide */
+}
+
+/* Đảm bảo ảnh có chiều cao và chiều rộng đúng */
+.banner-img {
+    width: 100%; /* Đảm bảo ảnh chiếm toàn bộ chiều rộng của slide */
+    height: 500px; /* Đảm bảo ảnh chiếm toàn bộ chiều cao của slide */
+    object-fit: contain; /* Đảm bảo ảnh được hiển thị đầy đủ mà không bị cắt */
+    object-position: center; /* Đảm bảo ảnh căn giữa nếu tỷ lệ không khớp */
+}
+
 
 /* Header */
 .header {
@@ -177,22 +205,6 @@ article {
     border-radius: 8px; /* Bo góc cho bài viết */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng bóng nhẹ */
 }
-
-/* Sidebar */
-.sidebar {
-    flex: 1; /* Chiếm 1 phần không gian của main-content */
-    background-color: #f1f1f1; /* Màu nền của sidebar */
-    padding: 15px; /* Khoảng cách bên trong sidebar */
-    border-radius: 8px; /* Bo góc cho sidebar */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng bóng nhẹ cho sidebar */
-}
-
-.sidebar h2 {
-    font-size: 18px; /* Kích thước chữ tiêu đề trong sidebar */
-    margin-bottom: 10px; /* Khoảng cách dưới tiêu đề */
-}
-
-
 /* Footer */
 .footer {
     background-color: #343a40; /* Màu nền của footer */
@@ -231,4 +243,10 @@ article {
 .footer-copy {
     font-size: 14px; /* Kích thước chữ của bản quyền */
     margin-top: 10px; /* Khoảng cách trên cho bản quyền */
+}
+
+/* Sidebar trái, phải */
+.sidebar-right {
+    flex: 1; /* Chiếm phần không gian trong main content */
+    margin: 0 10px; /* Khoảng cách giữa các sidebar */
 }
