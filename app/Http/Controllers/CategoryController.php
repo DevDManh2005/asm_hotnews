@@ -90,10 +90,7 @@ class CategoryController extends Controller
         // Lấy tất cả danh mục để hiển thị menu
         $categories = Category::all();
         
-        // Lấy tất cả quảng cáo
-        $ads = Ad::all();
-        
         // Trả về view với dữ liệu
-        return view('category.show', compact('category', 'news', 'categories', 'ads'));
+        return view('category.show', compact('category', 'news', 'categories'));
     }
 }

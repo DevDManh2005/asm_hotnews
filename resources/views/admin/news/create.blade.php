@@ -1,54 +1,181 @@
 @extends('admin.layout.admin')
-
+@section('admin.title', 'Thêm Bài Viết')
 @section('content')
-<div class="container">
-    <h1 class="mb-4">Thêm Bài Viết</h1>
+    <div class="container-news-create">
+        <h1>Thêm Bài Viết</h1>
 
-    <form action="{{ route('admin.news.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-    
-        <!-- Tiêu đề bài viết -->
-        <div class="mb-3">
-            <label for="title" class="form-label">Tiêu Đề</label>
-            <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" required>
-        </div>
-    
-        <!-- Nội dung bài viết -->
-        <div class="mb-3">
-            <label for="content" class="form-label">Nội Dung</label>
-            <textarea class="form-control" id="content" name="content" rows="10" required>{{ old('content') }}</textarea>
-        </div>
-    
-        <!-- Chọn danh mục -->
-        <div class="mb-3">
-            <label for="category_id" class="form-label">Danh Mục</label>
-            <select class="form-control" id="category_id" name="category_id" required>
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-                @endforeach
-            </select>
-        </div>
-    
-        <!-- Slug bài viết -->
-        <div class="mb-3">
-            <label for="slug" class="form-label">Slug</label>
-            <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug') }}">
-        </div>
-    
-        <!-- Lượt xem -->
-        <div class="mb-3">
-            <label for="views" class="form-label">Lượt Xem</label>
-            <input type="number" class="form-control" id="views" name="views" value="{{ old('views', 0) }}">
-        </div>
-    
-        <!-- Hình ảnh bài viết -->
-        <div class="mb-3">
-            <label for="image" class="form-label">Hình Ảnh</label>
-            <input type="file" class="form-control" id="image" name="image" accept="image/*">
-        </div>
-    
-        <button type="submit" class="btn btn-primary">Thêm Bài Viết</button>
-    </form>
-    
-</div>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <form action="{{ route('admin.news.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+
+            <!-- Tiêu đề bài viết -->
+            <div class="form-group">
+                <label for="title">Tiêu Đề</label>
+                <input type="text" id="title" name="title" value="{{ old('title') }}" required>
+            </div>
+           
+            <div class="form-group">
+                <label for="content">Nội Dung</label> 
+                <textarea id="editor" name="content" rows="10">{{ old('content') }}</textarea>
+            </div>
+            <!-- Danh mục -->
+            <div class="form-group">
+                <label for="category_id">Danh Mục</label>
+                <select id="category_id" name="category_id" required>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <!-- Slug bài viết -->
+            <div class="form-group">
+                <label for="slug">Slug</label>
+                <input type="text" id="slug" name="slug" value="{{ old('slug') }}">
+            </div>
+
+            <!-- Hình ảnh bài viết -->
+            <div class="form-group">
+                <label for="image">Hình Ảnh</label>
+                <input type="file" id="image" name="image" accept="image/*">
+            </div>
+
+            <button type="submit" class="btn btn-submit">Thêm Bài Viết</button>
+        </form>
+    </div>
+
 @endsection
+<style>
+    #editor img {
+        width: 300px;
+        height: 150px;
+    }
+</style>
+
+<style>
+    
+    /* Container chính của phần Thêm Bài Viết */
+    .container-news-create {
+        padding: 30px;
+        background-color: #fff;
+        margin-top: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+    }
+
+    /* Tiêu đề trang */
+    .container-news-create h1 {
+        font-size: 2em;
+        color: #2d3e50;
+        margin-bottom: 30px;
+        font-weight: 600;
+    }
+
+    /* Các nhóm form */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        font-size: 1.1em;
+        color: #34495e;
+        margin-bottom: 10px;
+        display: inline-block;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        font-size: 1em;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #f7f7f7;
+        transition: border 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        border-color: #3498db;
+        /* Màu sáng khi focus */
+        outline: none;
+    }
+
+    /* Các trường nội dung */
+    .form-group textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    /* Hiển thị hình ảnh hiện tại */
+    .image-preview {
+        margin-top: 10px;
+    }
+
+    .image-preview img {
+        width: 200px;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    /* Nút bấm Thêm Bài Viết */
+    .btn-submit {
+        background-color: #1abc9c;
+        /* Nút màu sáng hiện đại */
+        color: #fff;
+        padding: 12px 25px;
+        font-size: 1.1em;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-submit:hover {
+        background-color: #16a085;
+        /* Màu nút khi hover */
+    }
+
+    /* Cải thiện khoảng cách giữa các phần tử */
+    .container-news-create form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Điều chỉnh kích thước của các trường dữ liệu */
+    .form-group input[type="file"] {
+        padding: 8px;
+        font-size: 1em;
+        border-radius: 8px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        margin-top: 10px;
+    }
+
+    /* Đảm bảo khoảng cách giữa các phần tử trong form */
+    .form-group input,
+    .form-group select,
+    .form-group textarea,
+    .form-group button {
+        margin-bottom: 20px;
+    }
+</style>

@@ -23,10 +23,7 @@ class HomeController extends Controller
         // Lấy danh mục kèm theo bài viết
         $newsByCategory = Category::with('news')->get();
 
-        // Lấy tất cả quảng cáo
-        $ads = Ad::all();
-
         // Trả về view index.blade.php với tất cả dữ liệu
-        return view('index', compact('ads', 'categories', 'latestNews', 'hotNews', 'newsByCategory'));
+        return view('index', compact( 'categories', 'latestNews', 'hotNews', 'newsByCategory'));
     }
 }

@@ -10,7 +10,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckRole;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminCommentController;
-use App\Http\Controllers\Admin\AdController;
 
 // ----------------------------
 // Nhóm Route cho trang chính (khách)
@@ -18,22 +17,17 @@ use App\Http\Controllers\Admin\AdController;
 
 Route::get('/', [HomeController::class, 'index'])->name('index'); // Trang chủ
 
-// Các route tĩnh
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
-
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
-
-Route::get('/quangcao', function () {
-    return view('quangcao');
-})->name('quangcao');
-
 // Route danh mục và bài viết
 Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('category.show'); // Xem bài viết theo danh mục
 Route::get('/news/{slug}', [NewsController::class, 'show'])->name('news.show'); // Xem chi tiết bài viết
+
+// ----------------------------
+// Route tìm kiếm bài viết
+// ----------------------------
+
+Route::get('/search', [NewsController::class, 'search'])->name('news.search');
+
+
 
 // ----------------------------
 // Nhóm Route liên quan đến xác thực (Đăng nhập, Đăng ký, Quên mật khẩu)
@@ -60,12 +54,10 @@ Route::middleware('auth')->post('/logout', [AuthController::class, 'logout'])->n
 // Nhóm Route cho người dùng đã đăng nhập
 // ----------------------------
 
+// Route cập nhật thông tin người dùng
 Route::middleware('auth')->group(function () {
-    // Hiển thị thông tin tài khoản
-    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
-    
-    // Cập nhật thông tin tài khoản
-    Route::put('/profile', [UserController::class, 'updateProfile'])->name('profile.update');
+    Route::get('profile', [UserController::class, 'profile'])->name('profile');
+    Route::put('profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
 });
 
 // ----------------------------
@@ -88,9 +80,6 @@ Route::middleware(['auth', CheckRole::class . ':admin'])->prefix('admin')->name(
     // Quản lý bình luận
     Route::get('/comments', [AdminCommentController::class, 'index'])->name('comments.index');
     Route::delete('/comments/{id}', [AdminCommentController::class, 'destroy'])->name('comments.delete');
-
-    // Quản lý quảng cáo
-    Route::resource('ads', AdController::class); // Đảm bảo sử dụng resource controller cho quảng cáo
 });
 
 // ----------------------------
@@ -103,13 +92,4 @@ Route::middleware('auth')->group(function () {
 
     // Đánh giá bình luận
     Route::post('/comment/{comment_id}/rate', [CommentController::class, 'rateComment'])->name('comment.rate');
-
-    // Xóa bình luận (chỉ admin có quyền xóa)
-    Route::middleware('admin')->delete('/comments/{comment_id}', [CommentController::class, 'deleteComment'])->name('comments.delete');
 });
-
-// ----------------------------
-// Quảng cáo - Hiển thị quảng cáo trong layout (dành cho các trang bên ngoài quản trị)
-// ----------------------------
-
-Route::get('/ads', [AdController::class, 'index'])->name('ads.index'); // Hiển thị quảng cáo trong layout

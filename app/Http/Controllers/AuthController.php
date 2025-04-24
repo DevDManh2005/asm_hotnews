@@ -6,25 +6,27 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use App\Models\User;
-use App\Models\Ad;  // Import Ad model
+
 class AuthController extends Controller
 {
     public function showRegisterForm()
     { 
         return view('auth.register');
-        
     }
 
     public function register(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'full_name' => 'required|string|max:255',  // Thêm validate cho full_name
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|required_with:password_confirmation|confirmed',
         ]);
 
+        // Tạo người dùng mới
         User::create([
             'name' => $request->name,
+            'full_name' => $request->full_name,  // Lưu thông tin full_name vào CSDL
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -63,8 +65,6 @@ class AuthController extends Controller
         // Nếu không thành công, trả về thông báo lỗi
         return back()->withErrors(['email' => 'Thông tin đăng nhập không chính xác.']);
     }
-    
-    
 
     public function logout()
     {
