@@ -17,6 +17,16 @@ use App\Http\Controllers\Admin\AdminCommentController;
 
 Route::get('/', [HomeController::class, 'index'])->name('index'); // Trang chủ
 
+// Route tĩnh
+Route::get('/gioithieu', function () {
+    return view('gioithieu');
+});
+
+Route::get('/lienhe', function () {
+    return view('lienhe');
+});
+
+
 // Route danh mục và bài viết
 Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('category.show'); // Xem bài viết theo danh mục
 Route::get('/news/{slug}', [NewsController::class, 'show'])->name('news.show'); // Xem chi tiết bài viết
@@ -26,10 +36,6 @@ Route::get('/news/{slug}', [NewsController::class, 'show'])->name('news.show'); 
 // ----------------------------
 
 Route::get('/search', [NewsController::class, 'search'])->name('news.search'); // Tìm kiếm bài viết
-
-
-
-
 
 // ----------------------------
 // Nhóm Route liên quan đến xác thực (Đăng nhập, Đăng ký, Quên mật khẩu)
